@@ -1,21 +1,28 @@
-## Put comments here that give an overall description of what your
-## functions do
+## DLD: This program creates a Matrix with four functions.
+## GET,SET,GETMATRIX, SETMATRIX
+## These function similarly to the Vector example in the assignment.
+## 
 
-## Write a short comment describing this function
+## This Function: makeCacheMatrix 
+## accepts a matrix and returns a matrix with four sub functions
 
-makeCacheMatrix <- function(mi = matrix()) {  ##Matrix in
+makeCacheMatrix <- function(mi = matrix()) { ##Matrix in is 'mi'
         mo <-NULL  ## Matrix Out
-     
+        
         set <- function(y=matrix()){
                 mi <<- y  ## Matrix incoming
                 mo  <<- NULL
         }
         
-        get <- function() mi
-        
+        get <- function() {
+                if (is.matrix(mi)) {
+                        return(mi)
+                }
+                return (NULL)
+        }
         setmatrix <- function(y=matrix()) {
                 ##library(MASS)
-                mo <<- y
+                mo <<- apply(y,c(1,2),solve)
         }
         
         getmatrix <- function() mo
@@ -24,17 +31,25 @@ makeCacheMatrix <- function(mi = matrix()) {  ##Matrix in
 }
 
 
-## Write a short comment describing this function
+## This function cacheSolve:
+## calls the MakeCacheMatrix function to build a matrix 
+## and uses the matrix's functions to check to see if the inverse is cached.
+## This function also returns a message to the screen regarding the cached result.
 
 cacheSolve <- function(mi=matrix(), ...) {
         ## Return a matrix that is the inverse of 'x'
-        mo <- mi$getmatrix()
+        mtx <- makeCacheMatrix(mi)
+        mo <- mtx$getmatrix()
         if (!is.null(mo)) {
                 message("getting cached matrix")
                 return(mo)
         }
-        data <- mi$get()
-        rc <- apply(y,c(1,2),solve)
-        x$setmean(mo)
-        mo
+        else { message("Not Cached, computing")
+                data <- mtx$get()
+                if (is.matrix(data)) {
+                        mo <- apply(data,c(1,2),solve)
+                        mtx$setmatrix(mi)
+                }
+        }
+        mtx
 }
