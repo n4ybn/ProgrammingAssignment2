@@ -4,7 +4,12 @@
 ## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
-test...33
+        y <-x
+     
+        mx <- function() {
+                library(MASS)
+                rc <- apply(y,c(1,2),ginv)
+        }
 }
 
 
