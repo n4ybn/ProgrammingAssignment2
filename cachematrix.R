@@ -1,4 +1,4 @@
-## DLD: July 26, 2015 
+## DLD: Sept 15, 2015 
 ## This program creates a Matrix with four functions.
 ## GET,SET,GETMATRIX, SETMATRIX
 ## These function similarly to the Vector example in the assignment.
